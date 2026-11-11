@@ -22,4 +22,9 @@ public record UserRegistrationRequest(
 	public static final int MIN_PASSWORD_LENGTH = 8;
 
 	public static final int MAX_PASSWORD_LENGTH = 72;
+
+	@Override
+	public String toString() {
+		return "UserRegistrationRequest[name=" + name + ", email=" + email + "]";
+	}
 }

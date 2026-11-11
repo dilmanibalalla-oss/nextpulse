@@ -120,6 +120,16 @@ class DtoValidationTest {
 	}
 
 	@Test
+	void requestTextOmitsPasswords() {
+		String password = "a-valid-password";
+		assertThat(registration().toString()).doesNotContain(password, "passwordHash");
+		assertThat(new UserLoginRequest("ada@example.com", password).toString())
+				.doesNotContain(password, "passwordHash");
+		assertThat(new AuthTokenResponse("signed-token", Instant.parse("2026-11-11T12:15:00Z"), userResponse()).toString())
+				.doesNotContain("signed-token", "passwordHash");
+	}
+
+	@Test
 	void passwordHashesAndEntitiesStayOutOfTheApiTypes() {
 		assertThat(componentNames(UserRegistrationRequest.class)).contains("password").doesNotContain("passwordHash");
 		assertThat(componentNames(UserLoginRequest.class)).contains("password").doesNotContain("passwordHash");

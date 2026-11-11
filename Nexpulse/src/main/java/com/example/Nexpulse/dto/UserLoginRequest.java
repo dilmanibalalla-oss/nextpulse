@@ -16,4 +16,9 @@ public record UserLoginRequest(
 		@Size(min = UserRegistrationRequest.MIN_PASSWORD_LENGTH, max = UserRegistrationRequest.MAX_PASSWORD_LENGTH)
 		String password
 ) {
+
+	@Override
+	public String toString() {
+		return "UserLoginRequest[email=" + email + "]";
+	}
 }

@@ -24,8 +24,24 @@ spring:
         jdbc:
           time_zone: UTC
 
+# JWT_SECRET is required and must be at least 32 bytes.
+# JWT_EXPIRATION is an ISO-8601 duration between 1 minute and 24 hours.
+nexpulse:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION:PT15M}
+
 server:
   port: 8080
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+
+logging:
+  level:
+    org.springframework.security: info
+    org.hibernate.orm.jdbc.bind: warn
 
 management:
   endpoints:
